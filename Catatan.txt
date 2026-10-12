@@ -1,0 +1,61 @@
+# Latihan OOP Interaktif: Simulasi ATM Mini
+
+Pada latihan ini, kamu akan membuat program ATM sederhana. Program ini akan meminta user memasukkan PIN. User hanya diberi kesempatan maksimal 3 kali untuk memasukkan PIN yang benar menggunakan perulangan `for`. Jika berhasil masuk, user bisa memilih menu transaksi menggunakan `if-else`.
+
+## Tugas 1: Buat Class `AkunATM` (Model / Cetakan)
+Class ini akan menyimpan data akun dan logika transaksi.
+Terapkan **Encapsulation** (gunakan `private` dan `public`).
+
+*   **Atribut (Private):**
+    *   `nama` (String)
+    *   `pin` (String) - *Ingat, PIN ATM lebih baik bertipe String agar bisa mendeteksi awalan 0*
+    *   `saldo` (double)
+*   **Constructor:**
+    *   Buat constructor untuk menginisialisasi `nama`, `pin`, dan `saldo` saat object dibuat pertama kali.
+*   **Methods (Public):**
+    *   `cekPin(String inputPin)` : Method ini mengembalikan nilai `boolean` (`true` jika `inputPin` sama dengan atribut `pin`, `false` jika salah). *Hint: gunakan `.equals()` untuk membandingkan String.*
+    *   `cekSaldo()` : Menampilkan sisa saldo saat ini.
+    *   `tarikTunai(double jumlah)` : Mengurangi saldo. Gunakan `if-else` untuk mengecek apakah `jumlah` lebih besar dari `saldo`. Jika ya, tolak transaksi. Jika tidak, kurangi saldo dan tampilkan pesan sukses.
+    *   `setorTunai(double jumlah)` : Menambahkan `jumlah` ke `saldo` dan menampilkan pesan sukses.
+
+## Tugas 2: Buat Class `Main` (Eksekusi & Interaksi)
+Di sinilah kamu akan menggunakan `Scanner`, `for`, dan `if-else`.
+
+1.  **Instansiasi Object:** Buat satu object dari class `AkunATM`. Misalnya: 
+    `AkunATM akun1 = new AkunATM("Ucup", "123456", 500000);`
+2.  **Siapkan Scanner:** Buat object `Scanner` untuk membaca input dari keyboard.
+3.  **Sistem Login (Gunakan `for` loop & `if-else`):**
+    *   Buat perulangan `for` dari 1 sampai 3 (memberikan 3x kesempatan).
+    *   Di dalam loop, minta user input PIN.
+    *   Gunakan method `cekPin` dari `akun1` untuk memvalidasi.
+    *   Jika PIN benar: Tampilkan pesan "Login Berhasil, Selamat datang [Nama]!", lalu gunakan `break;` untuk keluar dari loop.
+    *   Jika PIN salah: Beri tahu sisa percobaannya. Jika sudah 3x salah, tampilkan "Kartu Anda Terblokir" lalu matikan program (`System.exit(0);`).
+4.  **Menu Transaksi:**
+    *   Jika berhasil login, tampilkan menu sederhana:
+        1. Cek Saldo
+        2. Tarik Tunai
+        3. Setor Tunai
+    *   Minta user menginputkan angka pilihan menu.
+    *   Gunakan `if - else if - else` (atau `switch-case` jika kamu mau) untuk memproses pilihan user.
+    *   Minta input nominal jika user memilih tarik atau setor tunai, lalu panggil method yang sesuai dari object `akun1`.
+
+## Contoh Ekspektasi Output di Terminal:
+```text
+=== SELAMAT DATANG DI ATM ===
+Masukkan PIN Anda: 111111
+PIN Salah! Sisa percobaan: 2
+Masukkan PIN Anda: 123456
+
+Login Berhasil! Selamat datang, Ucup.
+Pilih Menu:
+1. Cek Saldo
+2. Tarik Tunai
+3. Setor Tunai
+Pilihan Anda: 2
+Masukkan nominal tarik tunai: 700000
+Maaf, saldo Anda tidak mencukupi.
+
+(Atau jika input benar)
+Pilihan Anda: 2
+Masukkan nominal tarik tunai: 150000
+Tarik tunai berhasil. Sisa saldo: 350000.0
